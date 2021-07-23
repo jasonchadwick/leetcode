@@ -73,26 +73,23 @@ class Solution(object):
                     return
                 curlist_add = curlist_add.next
 
-list1 = ListNode(9,None)
-cur = list1
-for i in range(3):
-    cur.next = ListNode(9,None)
-    cur = cur.next
-
-list2 = ListNode(9,None)
-cur = list2
-for i in range(4):
-    cur.next = ListNode(9,None)
-    cur = cur.next
-
-s = Solution()
-res1 = s.addTwoNumbers(list1, list2)
-res2 = s.addTwoNumbers(list2, list1)
-
-while res1 is not None:
-    print(res1.val)
-    res1 = res1.next
-
-while res2 is not None:
-    print(res2.val)
-    res2 = res2.next
+"""
+Better solution: (more elegant, not that much faster)
+    def addTwoNumbers(self, l1, l2):
+        result = ListNode(0)
+        result_tail = result
+        carry = 0
+                
+        while l1 or l2 or carry:            
+            val1  = (l1.val if l1 else 0)
+            val2  = (l2.val if l2 else 0)
+            carry, out = divmod(val1+val2 + carry, 10)    
+                      
+            result_tail.next = ListNode(out)
+            result_tail = result_tail.next                      
+            
+            l1 = (l1.next if l1 else None)
+            l2 = (l2.next if l2 else None)
+               
+        return result.next
+"""
